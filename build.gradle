@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+// this turns it back on
+//compileJava.options.debugOptions.debugLevel = "source,lines,vars"
+
+compileJava.doLast {
+  println "running javap"
+  foo = ["javap", "-l", "-classpath", "build/classes/main", "Foo"].execute()
+  foo.in.eachLine { line -> println line }
+  foo.waitFor()
+
+}

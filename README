@@ -1,0 +1,52 @@
+Example of how Gradle milestone9 generated java classes don't include variable debugging (and gradle milestone 8 does).
+
+
+To test it out, set the appropriate Gradle version, then run:
+gradle clean compileJava
+
+The milestone 9 version has the LocalVariableTable missing
+
+Milestone 8 (GOOD)
+===================================
+Compiled from "Foo.java"
+public class Foo extends java.lang.Object{
+public Foo();
+  LineNumberTable: 
+   line 1: 0
+
+  LocalVariableTable: 
+   Start  Length  Slot  Name   Signature
+   0      5      0    this       LFoo;
+
+
+public static void main(java.lang.String[]);
+  LineNumberTable: 
+   line 4: 0
+   line 5: 8
+
+  LocalVariableTable: 
+   Start  Length  Slot  Name   Signature
+   0      9      0    args       [Ljava/lang/String;
+
+
+}
+
+
+Milestone 9 (BAD)
+====================================
+Compiled from "Foo.java"
+public class Foo extends java.lang.Object{
+public Foo();
+  LineNumberTable: 
+   line 1: 0
+
+
+
+public static void main(java.lang.String[]);
+  LineNumberTable: 
+   line 4: 0
+   line 5: 8
+
+
+
+}
